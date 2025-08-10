@@ -12,9 +12,7 @@ function Section({ id, title, children }) {
 }
 
 function ComingSoon({ label = "Coming soon" }) {
-  return (
-    <div className="sponsor-placeholder">{label}</div>
-  );
+  return <div className="sponsor-placeholder">{label}</div>;
 }
 
 function Counter({ target, className }) {
@@ -22,21 +20,29 @@ function Counter({ target, className }) {
   const ref = useRef(null);
   const ran = useRef(false);
   useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !ran.current) {
-        ran.current = true;
-        animateCount(target, setVal);
-      }
-    }, { threshold: 0.4 });
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !ran.current) {
+          ran.current = true;
+          animateCount(target, setVal);
+        }
+      },
+      { threshold: 0.4 }
+    );
     if (ref.current) io.observe(ref.current);
     return () => io.disconnect();
   }, [target]);
-  return <div ref={ref} className={className}>{val}</div>;
+  return (
+    <div ref={ref} className={className}>
+      {val}
+    </div>
+  );
 }
 
 function animateCount(raw, setter) {
   const { total, toText } = parsePretty(raw);
-  const dur = 1200, t0 = performance.now();
+  const dur = 1200,
+    t0 = performance.now();
   function step(t) {
     const k = Math.min(1, (t - t0) / dur);
     const e = 1 - Math.pow(1 - k, 3);
@@ -49,20 +55,26 @@ function animateCount(raw, setter) {
 function parsePretty(raw) {
   const plus = /\+$/.test(raw);
   const currency = raw.trim().startsWith("$") ? "$" : "";
-  const s = raw.replace("$","").replace("+","").trim();
+  const s = raw.replace("$", "").replace("+", "").trim();
   const unit = /[kKmM]$/.test(s) ? s.slice(-1).toLowerCase() : "";
   const mult = unit === "k" ? 1_000 : unit === "m" ? 1_000_000 : 1;
-  const num = parseFloat(unit ? s.slice(0,-1) : s);
+  const num = parseFloat(unit ? s.slice(0, -1) : s);
   const total = Number.isFinite(num) ? Math.round(num * mult) : 0;
   function toText(n) {
-    if (mult === 1_000_000) return `${currency}${(n/1_000_000).toFixed(n>=10_000_000?0:1)}M${plus?"+" : ""}`;
-    if (mult === 1_000)     return `${currency}${(n/1_000).toFixed(n>=10_000?0:1)}K${plus?"+" : ""}`;
-    return `${currency}${n.toLocaleString()}${plus?"+" : ""}`;
+    if (mult === 1_000_000)
+      return `${currency}${(n / 1_000_000).toFixed(n >= 10_000_000 ? 0 : 1)}M${
+        plus ? "+" : ""
+      }`;
+    if (mult === 1_000)
+      return `${currency}${(n / 1_000).toFixed(n >= 10_000 ? 0 : 1)}K${
+        plus ? "+" : ""
+      }`;
+    return `${currency}${n.toLocaleString()}${plus ? "+" : ""}`;
   }
   return { total, toText };
 }
 
-/* ---------- PDFs (working ones) ---------- */
+/* ---------- PDFs (as you had them) ---------- */
 const GUIDES = [
   {
     title: "Grant Writing Guide – Aspire STEM",
@@ -170,7 +182,7 @@ const PARTNERS = [
     name: "NeuraVia",
     blurb:
       "Global youth initiative building AI tools for early neuro diagnosis; funded 20K+; recruiting.",
-    links: [{ label: "Discord", href: "https://discord.gg/pvcAepJQBH" }], // <- was “Server”, now “Discord”
+    links: [{ label: "Discord", href: "https://discord.gg/pvcAepJQBH" }],
   },
 ];
 
@@ -186,12 +198,33 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home youtube={youtube} achievr={achievr} />} />
         <Route path="/competitions" element={<Competitions />} />
-        <Route path="/leadership" element={<Page title="Leadership Team"><ComingSoon /></Page>} />
+        <Route
+          path="/leadership"
+          element={
+            <Page title="Leadership Team">
+              <ComingSoon />
+            </Page>
+          }
+        />
         <Route path="/partners" element={<Partners />} />
         <Route path="/sponsors" element={<Sponsors />} />
         <Route path="/resources" element={<ResourcesPage />} />
-        <Route path="/youtube" element={<Page title="YouTube"><YouTubeBlock channel={youtube} /></Page>} />
-        <Route path="/donate" element={<Page title="Donate"><ComingSoon /></Page>} />
+        <Route
+          path="/youtube"
+          element={
+            <Page title="YouTube">
+              <YouTubeBlock channel={youtube} />
+            </Page>
+          }
+        />
+        <Route
+          path="/donate"
+          element={
+            <Page title="Donate">
+              <ComingSoon />
+            </Page>
+          }
+        />
       </Routes>
       <Footer />
     </div>
@@ -205,8 +238,10 @@ function Header({ discord, youtube }) {
       <div className="logo">
         Elevate{" "}
         <span className="logo-stem">
-          <span className="grad">S</span><span className="grad">T</span>
-          <span className="grad">E</span><span className="grad">M</span>
+          <span className="grad">S</span>
+          <span className="grad">T</span>
+          <span className="grad">E</span>
+          <span className="grad">M</span>
         </span>
       </div>
       <nav>
@@ -217,8 +252,12 @@ function Header({ discord, youtube }) {
         <Link to="/sponsors">Sponsors</Link>
         <Link to="/resources">Resources</Link>
         <Link to="/donate">Donate</Link>
-        <a href={youtube} target="_blank" rel="noreferrer">YouTube</a>
-        <a className="btn-sm" href={discord} target="_blank" rel="noreferrer">Discord</a>
+        <a href={youtube} target="_blank" rel="noreferrer">
+          YouTube
+        </a>
+        <a className="btn-sm" href={discord} target="_blank" rel="noreferrer">
+          Discord
+        </a>
       </nav>
     </header>
   );
@@ -241,11 +280,14 @@ function Footer() {
 /* ---------- Pages ---------- */
 function Home({ youtube, achievr }) {
   useEffect(() => {
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>e.isIntersecting && e.target.classList.add("revealed"));
-    },{threshold:.3});
-    document.querySelectorAll(".reveal, .stat").forEach(el=>io.observe(el));
-    return ()=>io.disconnect();
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => e.isIntersecting && e.target.classList.add("revealed"));
+      },
+      { threshold: 0.3 }
+    );
+    document.querySelectorAll(".reveal, .stat").forEach((el) => io.observe(el));
+    return () => io.disconnect();
   }, []);
 
   return (
@@ -255,13 +297,13 @@ function Home({ youtube, achievr }) {
       <section className="stats-wrap">
         <div className="stats">
           {[
-            { k:"1k+", v:"Member network" },
-            { k:"13M+", v:"Impressions" },
-            { k:"160k+", v:"People reached" },
-            { k:"15+", v:"Workshops" },
-            { k:"100+", v:"Partnerships" },
-            { k:"$3k+", v:"Raised for access" },
-          ].map(({k,v})=>(
+            { k: "1k+", v: "Member network" },
+            { k: "13M+", v: "Impressions" },
+            { k: "160k+", v: "People reached" },
+            { k: "15+", v: "Workshops" },
+            { k: "100+", v: "Partnerships" },
+            { k: "$3k+", v: "Raised for access" },
+          ].map(({ k, v }) => (
             <div key={v} className="stat reveal">
               <Counter target={k} className="stat-k" />
               <div className="stat-v">{v}</div>
@@ -282,20 +324,36 @@ function Home({ youtube, achievr }) {
             collaborated with top universities to bring admissions officers and opportunities directly to students.
           </p>
           <div className="cta">
-            <Link className="btn" to="/competitions">View Competitions</Link>
-            <a className="btn-outline" href={youtube} target="_blank" rel="noreferrer">Watch on YouTube</a>
+            <Link className="btn" to="/competitions">
+              View Competitions
+            </Link>
+            <a className="btn-outline" href={youtube} target="_blank" rel="noreferrer">
+              Watch on YouTube
+            </a>
           </div>
         </div>
       </Section>
 
       <Section title="Explore">
         <div className="tiles reveal">
-          <Link className="tile" to="/competitions">Competitions</Link>
-          <Link className="tile" to="/leadership">Leadership Team</Link>
-          <Link className="tile" to="/partners">Partners</Link>
-          <Link className="tile" to="/sponsors">Sponsors</Link>
-          <Link className="tile" to="/resources">Resources</Link>
-          <Link className="tile" to="/donate">Donate</Link>
+          <Link className="tile" to="/competitions">
+            Competitions
+          </Link>
+          <Link className="tile" to="/leadership">
+            Leadership Team
+          </Link>
+          <Link className="tile" to="/partners">
+            Partners
+          </Link>
+          <Link className="tile" to="/sponsors">
+            Sponsors
+          </Link>
+          <Link className="tile" to="/resources">
+            Resources
+          </Link>
+          <Link className="tile" to="/donate">
+            Donate
+          </Link>
         </div>
       </Section>
 
@@ -303,9 +361,11 @@ function Home({ youtube, achievr }) {
         <p className="muted center mb16">
           Download ready-to-use guides and templates for research, internships, grants, and competitions.
         </p>
-        <ResourceGrid items={GUIDES.slice(0,6)} />
+        <ResourceGrid items={GUIDES.slice(0, 6)} />
         <div className="browse-wrap">
-          <Link className="btn-outline" to="/resources">Browse all resources</Link>
+          <Link className="btn-outline" to="/resources">
+            Browse all resources
+          </Link>
         </div>
       </Section>
 
@@ -313,7 +373,7 @@ function Home({ youtube, achievr }) {
         <a className="achievr" href={achievr} target="_blank" rel="noreferrer">
           <div className="achievr-badge">New</div>
           <div className="achievr-text">
-            <strong>Achievr:</strong> college insights & planning for students — try it now
+            <strong>Achievr:</strong> college insights &amp; planning for students — try it now
           </div>
           <span className="achievr-cta">Open</span>
         </a>
@@ -327,9 +387,15 @@ function Competitions() {
     <Section>
       <h2 className="page-title">The STEMvision 2025</h2>
       <div className="page-body">
-        <p><strong>Organizer:</strong> Elevate STEM</p>
-        <p><strong>Max Team Size:</strong> 4 participants</p>
-        <p><strong>Entry Fee:</strong> $10 per person</p>
+        <p>
+          <strong>Organizer:</strong> Elevate STEM
+        </p>
+        <p>
+          <strong>Max Team Size:</strong> 4 participants
+        </p>
+        <p>
+          <strong>Entry Fee:</strong> $10 per person
+        </p>
 
         <h3>About the Competition</h3>
         <p>
@@ -341,25 +407,68 @@ function Competitions() {
         </p>
 
         <h3>Scoring Scale</h3>
-<p><em>1 = Excellent | 2 = Very Good | 3 = Good | 4 = Fair | 5 = Needs Improvement | 6 = Poor</em></p>
+        <p>
+          <em>
+            1 = Excellent | 2 = Very Good | 3 = Good | 4 = Fair | 5 = Needs Improvement | 6 = Poor
+          </em>
+        </p>
 
-  <div className="table-wrap">
-  <div className="table">
-    <div className="row head"><div>Category</div><div>Criteria</div><div>Weight</div></div>
-    <div className="row"><div>Creativity & Originality</div><div>Fresh, unique approach; not derivative</div><div>20%</div></div>
-    <div className="row"><div>Innovation & Practicality</div><div>New methods/tech; real-world potential</div><div>20%</div></div>
-    <div className="row"><div>Technical Skill & Execution</div><div>Accuracy; depth; appropriate tools</div><div>25%</div></div>
-    <div className="row"><div>Research & Documentation</div><div>Background research, citations, clarity</div><div>15%</div></div>
-    <div className="row"><div>Impact & Contribution</div><div>Relevance; problem-solving potential</div><div>15%</div></div>
-    <div className="row"><div>Presentation & Communication</div><div>Clear, engaging presentation and Q&A</div><div>5%</div></div>
-  </div>
-</div>
+        {/* NEW: semantic table for rubric */}
+        <div className="rubric-wrap">
+          <table className="rubric">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Criteria</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Creativity &amp; Originality</td>
+                <td>Fresh, unique approach; not derivative</td>
+                <td className="w">20%</td>
+              </tr>
+              <tr>
+                <td>Innovation &amp; Practicality</td>
+                <td>New methods/tech; real-world potential</td>
+                <td className="w">20%</td>
+              </tr>
+              <tr>
+                <td>Technical Skill &amp; Execution</td>
+                <td>Accuracy; depth; appropriate tools</td>
+                <td className="w">25%</td>
+              </tr>
+              <tr>
+                <td>Research &amp; Documentation</td>
+                <td>Background research, citations, clarity</td>
+                <td className="w">15%</td>
+              </tr>
+              <tr>
+                <td>Impact &amp; Contribution</td>
+                <td>Relevance; problem-solving potential</td>
+                <td className="w">15%</td>
+              </tr>
+              <tr>
+                <td>Presentation &amp; Communication</td>
+                <td>Clear, engaging presentation and Q&amp;A</td>
+                <td className="w">5%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <h3>How Scoring Works</h3>
         <p>Judges assign a score from 1 (excellent) to 6 (poor) for each category. Convert to points:</p>
         <pre className="code">(7 – Score) ÷ 6 × Category Weight = Category Points</pre>
-        <p>Example: Creativity score of 2 (20% weight) → (7–2)=5 → 5/6≈0.833 → 0.833×20 = <strong>16.67 points</strong>.</p>
-        <p>Add all category points for a total out of 100. If tied, the <strong>Impact & Contribution</strong> score decides the winner.</p>
+        <p>
+          Example: Creativity score of 2 (20% weight) → (7–2)=5 → 5/6≈0.833 → 0.833×20 ={" "}
+          <strong>16.67 points</strong>.
+        </p>
+        <p>
+          Add all category points for a total out of 100. If tied, the <strong>Impact &amp; Contribution</strong>{" "}
+          score decides the winner.
+        </p>
 
         <h3>Cash Prizes</h3>
         <ul>
@@ -370,13 +479,24 @@ function Competitions() {
 
         <h3>Judging Notes</h3>
         <ul>
-          <li><strong>1 (Excellent):</strong> Exceeds expectations; exceptional quality.</li>
-          <li><strong>3 (Good):</strong> Meets most expectations with some room for improvement.</li>
-          <li><strong>6 (Poor):</strong> Fails to meet core criteria.</li>
+          <li>
+            <strong>1 (Excellent):</strong> Exceeds expectations; exceptional quality.
+          </li>
+          <li>
+            <strong>3 (Good):</strong> Meets most expectations with some room for improvement.
+          </li>
+          <li>
+            <strong>6 (Poor):</strong> Fails to meet core criteria.
+          </li>
         </ul>
         <p>Judges must provide short written feedback for each category.</p>
 
-        <a className="btn mt12" href="https://forms.gle/Z2ZMXycnbTcL5NxNA" target="_blank" rel="noreferrer">
+        <a
+          className="btn mt12"
+          href="https://forms.gle/Z2ZMXycnbTcL5NxNA"
+          target="_blank"
+          rel="noreferrer"
+        >
           Submit your project
         </a>
       </div>
@@ -388,15 +508,19 @@ function Partners() {
   return (
     <Section>
       <h2 className="page-title">Partners</h2>
-      <p className="muted center mb16">We collaborate with organizations that actually move the needle for students.</p>
+      <p className="muted center mb16">
+        We collaborate with organizations that actually move the needle for students.
+      </p>
       <div className="partners-grid">
-        {PARTNERS.map(p=>(
+        {PARTNERS.map((p) => (
           <div key={p.name} className="partner-card">
             <div className="partner-name">{p.name}</div>
             <div className="partner-blurb">{p.blurb}</div>
             <div className="partner-actions">
-              {p.links.map(l=>(
-                <a key={l.href} className="pill" href={l.href} target="_blank" rel="noreferrer">{l.label}</a>
+              {p.links.map((l) => (
+                <a key={l.href} className="pill" href={l.href} target="_blank" rel="noreferrer">
+                  {l.label}
+                </a>
               ))}
             </div>
           </div>
@@ -410,7 +534,9 @@ function Sponsors() {
   return (
     <Section>
       <h2 className="page-title">Thank you to our sponsors</h2>
-      <p className="muted center">We’ll showcase sponsor logos and tiers here. Interested in supporting? Reach out!</p>
+      <p className="muted center">
+        We’ll showcase sponsor logos and tiers here. Interested in supporting? Reach out!
+      </p>
       <ComingSoon label="Sponsor logos coming soon" />
     </Section>
   );
@@ -420,10 +546,14 @@ function ResourcesPage() {
   return (
     <Section>
       <h2 className="page-title">Resources</h2>
-      <p className="muted center mb16">Curated PDFs to help you research, apply, and present—free to download.</p>
+      <p className="muted center mb16">
+        Curated PDFs to help you research, apply, and present—free to download.
+      </p>
       <ResourceGrid items={GUIDES} />
       <div className="browse-wrap">
-        <Link className="btn-outline" to="/">Back to Home</Link>
+        <Link className="btn-outline" to="/">
+          Back to Home
+        </Link>
       </div>
     </Section>
   );
@@ -432,14 +562,16 @@ function ResourcesPage() {
 function ResourceGrid({ items }) {
   return (
     <div className="guides-grid">
-      {items.map(g=>{
+      {items.map((g) => {
         const filename = g.file.split("/").pop() || "guide.pdf";
         return (
           <div key={g.file} className="guide-card">
             <div className="guide-title">{g.title}</div>
             <div className="guide-blurb">{g.blurb}</div>
             <div className="guide-actions">
-              <a className="pill" href={g.file} download={filename}>Download</a>
+              <a className="pill" href={g.file} download={filename}>
+                Download
+              </a>
             </div>
           </div>
         );
@@ -456,14 +588,20 @@ function Hero() {
         <h1 className="hero-title">
           Elevate{" "}
           <span className="stem">
-            <span className="grad">S</span><span className="grad">T</span>
-            <span className="grad">E</span><span className="grad">M</span>
+            <span className="grad">S</span>
+            <span className="grad">T</span>
+            <span className="grad">E</span>
+            <span className="grad">M</span>
           </span>
         </h1>
-        <p className="sub">Changing Lives Through STEM, One Step At A Time</p>
+      <p className="sub">Changing Lives Through STEM, One Step At A Time</p>
         <div className="cta">
-          <Link className="btn" to="/competitions">View Competitions</Link>
-          <Link className="btn-outline" to="/donate">Donate</Link>
+          <Link className="btn" to="/competitions">
+            View Competitions
+          </Link>
+          <Link className="btn-outline" to="/donate">
+            Donate
+          </Link>
         </div>
       </div>
       <div className="bg-glow" />
@@ -479,10 +617,15 @@ function Page({ title, children }) {
   );
 }
 function YouTubeBlock({ channel }) {
-  const exampleId = "dQw4w9WgXcQ"; // swap with your video id later
+  const exampleId = "dQw4w9WgXcQ"; // swap later for your video id
   return (
     <>
-      <p className="muted">Channel: <a href={channel} target="_blank" rel="noreferrer">{channel}</a></p>
+      <p className="muted">
+        Channel:{" "}
+        <a href={channel} target="_blank" rel="noreferrer">
+          {channel}
+        </a>
+      </p>
       <div className="video">
         <iframe
           src={`https://www.youtube.com/embed/${exampleId}`}
@@ -492,6 +635,6 @@ function YouTubeBlock({ channel }) {
         />
       </div>
     </>
-    
   );
 }
+
