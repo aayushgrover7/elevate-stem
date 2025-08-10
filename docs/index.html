@@ -4,7 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elevate STEM</title>
-    
+    <style>
+      /* FORCE mobile navbar layout */
+      @media (max-width: 768px) {
+        header.nav{
+          padding:10px 4vw;
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          gap:8px;
+        }
+        header.nav nav{
+          display:flex;
+          flex-wrap:wrap;
+          justify-content:center;
+          align-items:center;
+          gap:8px 12px;   /* row-gap / column-gap */
+          max-width:560px;
+        }
+        header.nav nav a{
+          display:block;
+          text-align:center;
+          padding:6px 0;
+          font-size:15px;
+          line-height:1.2;
+        }
+        header.nav .btn-sm{
+          order:2;           /* push below the links */
+          margin-top:6px;
+          font-size:14px;
+          padding:8px 14px;
+        }
+      }
+    </style>
     <link rel="icon" type="image/jpeg" href="/assets/channels4_profile-C9q-_Tm5.jpg" />
     <script type="module" crossorigin src="/assets/index-DS_1K9a4.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-3Gx5Gw6Q.css">
