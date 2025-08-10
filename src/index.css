@@ -122,23 +122,43 @@ body{margin:0;font-family:system-ui,-apple-system,"Inter","Segoe UI",Roboto,Aria
   margin-top: 12px;
 }
 
+/* --- Mobile navbar, forced --- */
 @media (max-width: 768px) {
-  .nav { padding: 10px 4vw; gap: 8px; flex-direction: column; align-items: center; }
-
-  .nav nav {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 8px 16px;      /* row-gap / column-gap */
-    justify-content: center;
-    align-items: center;
+  header.nav { 
+    padding: 10px 4vw !important; 
+    gap: 8px !important; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: center !important; 
   }
 
-  .nav nav a { font-size: 15px; line-height: 1.2; text-align: center; }
-  .logo { font-size: 22px; }
-  .nav .btn-sm { font-size: 14px; padding: 8px 14px; margin-top: 6px; }
-}
+  header.nav .logo { 
+    font-size: 22px !important; 
+  }
 
-/* extra tiny phones */
-@media (max-width: 420px) {
-  .nav nav { grid-template-columns: repeat(2, auto); }
+  header.nav nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px 12px !important;   /* row-gap / column-gap */
+    max-width: 560px !important; /* stops overly wide rows */
+  }
+
+  header.nav nav a {
+    display: block !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    padding: 6px 0 !important;
+  }
+
+  /* keep the Discord pill on its own line under the links */
+  header.nav .btn-sm {
+    order: 2;                 /* push to the end of the wrapped links */
+    width: auto;
+    margin-top: 6px !important;
+    font-size: 14px !important;
+    padding: 8px 14px !important;
+  }
 }
