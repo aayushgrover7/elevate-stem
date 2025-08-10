@@ -114,3 +114,5 @@ body{margin:0;font-family:system-ui,-apple-system,"Inter","Segoe UI",Roboto,Aria
 .achievr-badge{background:#fff; border:1px solid var(--line); color:#0A84FF; font-weight:800; padding:4px 10px; border-radius:999px; font-size:.8rem}
 .achievr-text{flex:1}
 .achievr-cta{color:#0A84FF; font-weight:800}
+
+.browse-wrap{display:flex; justify-content:center; margin-top:12px}
