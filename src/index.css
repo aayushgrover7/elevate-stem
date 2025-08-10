@@ -122,32 +122,23 @@ body{margin:0;font-family:system-ui,-apple-system,"Inter","Segoe UI",Roboto,Aria
   margin-top: 12px;
 }
 
-/* --- Mobile navbar fix --- */
 @media (max-width: 768px) {
-  .nav {
-    flex-direction: column;          /* stack logo + links */
-    align-items: center;              /* center the block */
-    gap: 10px;
-  }
+  .nav { padding: 10px 4vw; gap: 8px; flex-direction: column; align-items: center; }
 
   .nav nav {
-    display: flex;
-    flex-direction: row;              /* links flow left→right */
-    flex-wrap: wrap;                  /* wrap to next line */
-    justify-content: center;          /* center the rows */
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 8px 16px;      /* row-gap / column-gap */
+    justify-content: center;
+    align-items: center;
   }
 
-  .nav nav a {
-    display: block;
-    padding: 8px 0;                   /* a bit of touch space */
-    text-align: center;
-  }
+  .nav nav a { font-size: 15px; line-height: 1.2; text-align: center; }
+  .logo { font-size: 22px; }
+  .nav .btn-sm { font-size: 14px; padding: 8px 14px; margin-top: 6px; }
+}
 
-  .nav .btn-sm {                      /* your Discord button */
-    align-self: center;               /* keep it centered */
-    margin-top: 8px;
-  }
-
-  .logo { margin-bottom: 2px; }
+/* extra tiny phones */
+@media (max-width: 420px) {
+  .nav nav { grid-template-columns: repeat(2, auto); }
 }
