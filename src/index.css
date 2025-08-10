@@ -162,3 +162,46 @@ body{margin:0;font-family:system-ui,-apple-system,"Inter","Segoe UI",Roboto,Aria
     padding: 8px 14px !important;
   }
 }
+
+/* ==== Competition rubric table ==== */
+.table {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr; /* Category | Criteria | Weight */
+  gap: 1px;                 /* thin grid lines via background below */
+  background: var(--line);  /* uses your existing --line color */
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 10px 0 18px;
+}
+
+/* Use row as a grid-row container without extra box */
+.table .row { display: contents; }
+
+/* Each “cell” (your inner divs) */
+.table .row > div {
+  background: #fff;
+  padding: 12px 14px;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+/* Header row */
+.table .head > div {
+  background: #0f172a;
+  color: #fff;
+  font-weight: 800;
+}
+
+/* Make weight column centered & tighter */
+.table .row > div:last-child {
+  text-align: center;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Mobile: allow horizontal scroll instead of squishing */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-wrap .table { min-width: 640px; } /* keep columns readable on small screens */
