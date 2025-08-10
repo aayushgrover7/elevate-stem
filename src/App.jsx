@@ -341,17 +341,19 @@ function Competitions() {
         </p>
 
         <h3>Scoring Scale</h3>
-        <p><em>1 = Excellent | 2 = Very Good | 3 = Good | 4 = Fair | 5 = Needs Improvement | 6 = Poor</em></p>
+<p><em>1 = Excellent | 2 = Very Good | 3 = Good | 4 = Fair | 5 = Needs Improvement | 6 = Poor</em></p>
 
-        <div className="table">
-          <div className="row head"><div>Category</div><div>Criteria</div><div>Weight</div></div>
-          <div className="row"><div>Creativity & Originality</div><div>Fresh, unique approach; not derivative</div><div>20%</div></div>
-          <div className="row"><div>Innovation & Practicality</div><div>New methods/tech; real-world potential</div><div>20%</div></div>
-          <div className="row"><div>Technical Skill & Execution</div><div>Accuracy; depth; appropriate tools</div><div>25%</div></div>
-          <div className="row"><div>Research & Documentation</div><div>Background research, citations, clarity</div><div>15%</div></div>
-          <div className="row"><div>Impact & Contribution</div><div>Relevance; problem-solving potential</div><div>15%</div></div>
-          <div className="row"><div>Presentation & Communication</div><div>Clear, engaging presentation and Q&A</div><div>5%</div></div>
-        </div>
+  <div className="table-wrap">
+  <div className="table">
+    <div className="row head"><div>Category</div><div>Criteria</div><div>Weight</div></div>
+    <div className="row"><div>Creativity & Originality</div><div>Fresh, unique approach; not derivative</div><div>20%</div></div>
+    <div className="row"><div>Innovation & Practicality</div><div>New methods/tech; real-world potential</div><div>20%</div></div>
+    <div className="row"><div>Technical Skill & Execution</div><div>Accuracy; depth; appropriate tools</div><div>25%</div></div>
+    <div className="row"><div>Research & Documentation</div><div>Background research, citations, clarity</div><div>15%</div></div>
+    <div className="row"><div>Impact & Contribution</div><div>Relevance; problem-solving potential</div><div>15%</div></div>
+    <div className="row"><div>Presentation & Communication</div><div>Clear, engaging presentation and Q&A</div><div>5%</div></div>
+  </div>
+</div>
 
         <h3>How Scoring Works</h3>
         <p>Judges assign a score from 1 (excellent) to 6 (poor) for each category. Convert to points:</p>
