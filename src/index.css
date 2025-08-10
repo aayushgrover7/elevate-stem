@@ -121,3 +121,17 @@ body{margin:0;font-family:system-ui,-apple-system,"Inter","Segoe UI",Roboto,Aria
   width: 100%;
   margin-top: 12px;
 }
+
+@media (max-width: 768px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  nav a {
+    display: block;
+    padding: 8px 0;
+  }
+}
