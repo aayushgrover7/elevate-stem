@@ -78,7 +78,7 @@ function parsePretty(raw) {
 const GUIDES = [
   {
     title: "Grant Writing Guide",
-    file: "/pdfs/Grant%20Writing%20Guide.pdf", // or your actual file name without Aspire STEM
+    file: "/pdfs/Grant%20Writing%20Guide%20-%20Aspire%20STEM%20Resource.pdf",
     blurb: "Templates and tips for strong funding apps.",
   },
   {
