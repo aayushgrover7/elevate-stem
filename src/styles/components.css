@@ -90,3 +90,13 @@
 .rl-download:hover { opacity: .8; transform: translateX(2px); }
 
 .browse-wrap { display: flex; justify-content: center; margin-top: 56px; }
+
+@media (max-width: 480px) {
+  .btn-primary  { padding: 12px 22px; font-size: .875rem; }
+  .btn-secondary { padding: 10px 20px; font-size: .875rem; }
+  .rl-grid { grid-template-columns: 1fr; }
+  .rl-thumb { padding: 24px 18px 16px; }
+  .rl-body { padding: 14px 18px 18px; }
+  .logo-cloud { gap: 8px; }
+  .logo-chip { font-size: .82rem; padding: 10px 16px; }
+}

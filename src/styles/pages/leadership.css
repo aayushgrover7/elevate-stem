@@ -31,4 +31,14 @@
 .lm-inner h3 { font-family: 'Montserrat', 'Inter', sans-serif; font-size: clamp(24px, 4vw, 36px); font-weight: 900; color: #fff; margin-bottom: 14px; letter-spacing: -.025em; }
 .lm-inner p  { color: rgba(255,255,255,.5); margin-bottom: 28px; line-height: 1.75; font-size: 1rem; }
 
-@media (max-width: 960px) { .team-grid { grid-template-columns: 1fr; max-width: 420px; } }
+@media (max-width: 960px) { .team-grid { grid-template-columns: 1fr; max-width: 480px; } }
+@media (max-width: 720px) {
+  .team-card { padding: 36px 28px; }
+  .team-avatar { width: 96px; height: 96px; }
+  .team-initials { font-size: 1.8rem; }
+  .team-name { font-size: 1.25rem; }
+}
+@media (max-width: 480px) {
+  .team-card { padding: 28px 20px; }
+  .lm-inner h3 { font-size: clamp(22px, 7vw, 32px); }
+}

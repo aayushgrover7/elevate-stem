@@ -57,4 +57,11 @@
   .comp-stat { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,.07); }
   .comp-stat:last-child { border-bottom: none; }
   .prizes { flex-direction: column; }
+  .comp-about, .comp-rubric { padding: 28px 22px; }
+}
+@media (max-width: 480px) {
+  .comp-about, .comp-rubric { padding: 22px 16px; }
+  .comp-closed-banner { font-size: .85rem; padding: 12px 14px; }
+  .rubric-table { font-size: .82rem; }
+  .rubric-table th, .rubric-table td { padding: 9px 8px; }
 }

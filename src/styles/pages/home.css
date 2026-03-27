@@ -64,11 +64,11 @@
 
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(76px, 13.5vw, 190px);
+  font-size: clamp(54px, 13.5vw, 190px);
   font-weight: 300;
   line-height: .9;
   letter-spacing: -.025em;
-  margin-bottom: clamp(28px, 4vw, 52px);
+  margin-bottom: clamp(24px, 4vw, 52px);
 }
 .hero-line-wrap {
   display: block;
@@ -389,23 +389,28 @@
 /* ── HOME RESPONSIVE ── */
 @media (max-width: 960px) {
   .about-grid { grid-template-columns: 1fr; gap: 36px; }
-  .solar-inner { grid-template-columns: 1fr; gap: 40px; }
-  .solar-stats { grid-template-columns: repeat(4, 1fr); }
   .programs-grid { grid-template-columns: repeat(2, 1fr); }
+  .atom-wrap { width: clamp(200px, 28vw, 360px); opacity: .18; }
 }
 @media (max-width: 720px) {
+  .atom-wrap { display: none; }
+  .hero-eyebrow { font-size: .65rem; gap: 8px; margin-bottom: 28px; }
+  .hero-sub { font-size: .93rem; max-width: 100%; }
   .impact-grid-inner { grid-template-columns: repeat(2, 1fr); }
   .impact-counter:nth-child(2) { border-right: none; }
-  .impact-counter:nth-child(1), .impact-counter:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,.07); }
-  .solar-stats { grid-template-columns: repeat(2, 1fr); }
+  .impact-counter:nth-child(1),
+  .impact-counter:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,.07); }
   .programs-grid { grid-template-columns: 1fr; }
-  .achievr-wrap { flex-direction: column; padding: 36px 28px; text-align: center; }
-  .achievr-left { flex-direction: column; text-align: center; }
-  .hero-stats { gap: 0; }
-  .hero-stat { padding: 0 clamp(12px, 4vw, 22px); }
+  .about-text h2 { font-size: clamp(28px, 7vw, 42px); }
 }
 @media (max-width: 480px) {
+  .hero { padding-top: calc(var(--nav-height) + 48px); padding-bottom: 60px; }
   .hero-cta { flex-direction: column; align-items: flex-start; }
+  .hero-cta a, .hero-cta .btn-secondary-dark { width: 100%; text-align: center; justify-content: center; }
   .about-ctas { flex-direction: column; }
-  .hero-stat { padding: 0 14px; }
+  .about-ctas a { width: 100%; text-align: center; justify-content: center; }
+  .impact-counter { padding: 32px 12px; }
+  .marquee-item { padding: 0 18px; font-size: .65rem; }
+  .program-card { padding: 28px 20px; }
+  .highlight-card { padding: 18px 16px; }
 }

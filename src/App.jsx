@@ -57,10 +57,10 @@ const HACKCLUB_DONATE = "https://hackclub.com/donations/";
 /* ─── UTILITIES ─── */
 function useReveal() {
   useEffect(() => {
-    const SELECTORS = ".reveal, .reveal-left, .reveal-right, .reveal-scale";
+    const SELECTORS = ".reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur";
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("revealed")),
-      { threshold: 0.12 }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
     document.querySelectorAll(SELECTORS).forEach((el) => io.observe(el));
     return () => io.disconnect();
@@ -513,7 +513,7 @@ function ProgramsSection() {
   ];
   return (
     <section className="section programs-section">
-      <div className="section-header reveal">
+      <div className="section-header reveal-blur">
         <div className="section-eyebrow">What We Do</div>
         <h2 className="section-title">Programs & Initiatives</h2>
         <p className="section-sub">From competitions to content — every program is free and student-driven.</p>
@@ -539,7 +539,7 @@ function ProgramsSection() {
 function ResourceLibrary() {
   return (
     <section className="section resource-library">
-      <div className="section-header reveal">
+      <div className="section-header reveal-blur">
         <div className="section-eyebrow">Free Downloads</div>
         <h2 className="section-title">Resource Library</h2>
         <p className="section-sub">Professional-grade guides and templates — completely free, no sign-up required.</p>
@@ -560,7 +560,7 @@ function ResourceLibrary() {
 function CommunityTrust() {
   return (
     <section className="section community-trust">
-      <div className="section-header reveal">
+      <div className="section-header reveal-blur">
         <div className="section-eyebrow">Trusted By</div>
         <h2 className="section-title">Our Partner Network</h2>
         <p className="section-sub">20+ organizations collaborate with Elevate STEM on programs that move the needle for students.</p>

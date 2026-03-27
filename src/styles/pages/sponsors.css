@@ -35,3 +35,14 @@
   background: var(--grad-accent); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .si-label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+
+@media (max-width: 720px) {
+  .sponsors-cta { padding: 36px 28px; margin-top: 44px; }
+  .sponsor-tier-grid { grid-template-columns: repeat(2, 1fr); }
+  .sponsors-impact { gap: 20px; }
+}
+@media (max-width: 480px) {
+  .sponsors-cta { padding: 28px 20px; }
+  .si-num { font-size: 1.3rem; }
+  .sponsor-placeholder { height: 72px; font-size: .75rem; }
+}

@@ -183,7 +183,12 @@
   .desk-nav { display: none; }
   .hamburger { display: flex; }
   .mobile-drawer { display: flex; }
+  .page-hero-title { font-size: clamp(32px, 8vw, 54px); }
+  .footer-inner { gap: 28px; }
 }
 @media (max-width: 480px) {
   .footer-links-group { gap: 20px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 4px; }
+  .status-text { font-size: .8rem; }
+  .page-hero { padding-top: clamp(44px, 8vw, 72px); padding-bottom: clamp(36px, 6vw, 64px); }
 }

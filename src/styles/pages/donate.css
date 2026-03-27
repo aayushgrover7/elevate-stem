@@ -33,4 +33,12 @@
 @media (max-width: 720px) {
   .donate-tier { gap: 16px; }
   .donate-cta-box { padding: 36px 24px; }
+  .donate-why { margin-bottom: 32px; }
+}
+@media (max-width: 480px) {
+  .donate-tier { padding: 18px 16px; gap: 14px; }
+  .donate-amt { font-size: 1.35rem; min-width: 52px; }
+  .donate-impact-text { font-size: .9rem; }
+  .donate-cta-box { padding: 24px 16px; }
+  .donate-why h3 { font-size: 1.05rem; }
 }
