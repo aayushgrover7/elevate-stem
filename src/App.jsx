@@ -286,33 +286,118 @@ function Home() {
   );
 }
 
+/* ── FLOATING ATOM ── */
+function FloatingAtom() {
+  const orbits = [
+    { angle: 0,   color: "#2CC46F", dur: "7s",  begin: "0s"    },
+    { angle: 60,  color: "#0A84FF", dur: "11s", begin: "-3.5s" },
+    { angle: 120, color: "#2CC46F", dur: "15s", begin: "-7s"   },
+  ];
+  return (
+    <svg className="atom-svg" viewBox="-160 -160 320 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="atomGlow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="nucGlow" x="-150%" y="-150%" width="400%" height="400%">
+          <feGaussianBlur stdDeviation="10" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="nucFill" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stopColor="#2CC46F"/>
+          <stop offset="100%" stopColor="#0A84FF"/>
+        </radialGradient>
+      </defs>
+      {orbits.map(({ angle, color, dur, begin }) => (
+        <g key={angle} transform={`rotate(${angle})`}>
+          <ellipse cx="0" cy="0" rx="130" ry="42" fill="none" stroke="rgba(255,255,255,.12)" strokeWidth="1"/>
+          <circle r="5.5" fill={color} filter="url(#atomGlow)">
+            <animateMotion
+              path="M 130,0 A 130,42 0 1,1 -130,0 A 130,42 0 1,1 130,0"
+              dur={dur} repeatCount="indefinite" begin={begin}
+            />
+          </circle>
+        </g>
+      ))}
+      <circle cx="0" cy="0" r="14" fill="url(#nucFill)" filter="url(#nucGlow)">
+        <animate attributeName="r" values="12;17;12" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="0" cy="0" r="6" fill="white" opacity="0.9"/>
+    </svg>
+  );
+}
+
 /* ── HERO ── */
 function Hero() {
+  const heroRef = useRef(null);
+  const titleRef = useRef(null);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const section = heroRef.current;
+    if (!section) return;
+    const onMove = (e) => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const rx = ((e.clientX - cx) / (rect.width / 2)) * 3;
+        const ry = ((e.clientY - cy) / (rect.height / 2)) * -1.5;
+        if (titleRef.current) {
+          titleRef.current.style.transform = `perspective(1200px) rotateY(${rx}deg) rotateX(${ry}deg)`;
+        }
+      });
+    };
+    const onLeave = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (titleRef.current) {
+        titleRef.current.style.transition = "transform .7s var(--ease-out-expo)";
+        titleRef.current.style.transform = "perspective(1200px) rotateY(0deg) rotateX(0deg)";
+        setTimeout(() => { if (titleRef.current) titleRef.current.style.transition = ""; }, 700);
+      }
+    };
+    section.addEventListener("mousemove", onMove);
+    section.addEventListener("mouseleave", onLeave);
+    return () => {
+      section.removeEventListener("mousemove", onMove);
+      section.removeEventListener("mouseleave", onLeave);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
   return (
-    <section className="hero">
+    <section className="hero" ref={heroRef}>
       <div className="hero-grain" />
+      <div className="atom-wrap"><FloatingAtom /></div>
       <div className="hero-inner">
         <div className="hero-eyebrow">
           <span className="hero-eyebrow-dot" />
           100% Student-Run Nonprofit · Free for Everyone
         </div>
-        <h1 className="hero-title">
+        <h1 className="hero-title" ref={titleRef}>
           <span className="hero-line-wrap">
-            <span className="hero-word hero-line-elevate" style={{ "--d": ".08s" }}>Elevate</span>
+            <span className="hero-line-elevate">
+              {"Elevate".split("").map((ch, i) => (
+                <span key={i} className="hero-letter" style={{ "--li": i }}>{ch}</span>
+              ))}
+            </span>
           </span>
           <span className="hero-line-wrap">
-            <span className="hero-word hero-line-stem" style={{ "--d": ".22s" }}>STEM</span>
+            <span className="hero-word hero-line-stem" style={{ "--d": ".48s" }}>STEM</span>
           </span>
         </h1>
-        <p className="hero-sub" style={{ animation: "fadeInUp .7s var(--ease-out-expo) .5s both" }}>
+        <p className="hero-sub">
           Built by students. Built for students.<br />
           Built to change what's possible.
         </p>
-        <div className="hero-cta" style={{ animation: "fadeInUp .7s var(--ease-out-expo) .62s both" }}>
+        <div className="hero-cta">
           <a className="btn-primary" href={DISCORD} target="_blank" rel="noreferrer">Join the Community</a>
           <Link className="btn-secondary-dark" to="/resources">Explore Resources</Link>
         </div>
-        <div className="hero-stats" style={{ animation: "fadeInUp .7s var(--ease-out-expo) .74s both" }}>
+        <div className="hero-stats">
           {STATS.map((s) => (
             <div key={s.v} className="hero-stat">
               <span className="hero-stat-num">{s.k}</span>
