@@ -249,10 +249,36 @@ function Footer() {
   );
 }
 
+/* ─── CURSOR GLOW ─── */
+function CursorGlow() {
+  const ref = useRef(null);
+  const raf = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    let revealed = false;
+    const onMove = (e) => {
+      if (raf.current) cancelAnimationFrame(raf.current);
+      raf.current = requestAnimationFrame(() => {
+        if (!el) return;
+        el.style.left = `${e.clientX}px`;
+        el.style.top  = `${e.clientY}px`;
+        if (!revealed) { el.style.opacity = "1"; revealed = true; }
+      });
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (raf.current) cancelAnimationFrame(raf.current);
+    };
+  }, []);
+  return <div className="cursor-glow" ref={ref} />;
+}
+
 /* ─── APP ROOT ─── */
 export default function App() {
   return (
     <div className="app-wrap">
+      <CursorGlow />
       <StatusBanner />
       <Header />
       <main>
@@ -271,12 +297,33 @@ export default function App() {
   );
 }
 
+/* ─── MARQUEE TICKER ─── */
+function MarqueeTicker() {
+  const items = [
+    "725+ Members", "7+ Workshops", "$574 Raised", "20+ Partners",
+    "100% Free", "Student-Led", "Open to All", "STEM for Everyone",
+  ];
+  const doubled = [...items, ...items];
+  return (
+    <div className="marquee-strip" aria-hidden="true">
+      <div className="marquee-track">
+        {doubled.map((item, i) => (
+          <span key={i} className="marquee-item">
+            {item}<span className="marquee-sep" />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── HOME PAGE ─── */
 function Home() {
   useReveal();
   return (
     <>
       <Hero />
+      <MarqueeTicker />
       <ImpactStrip />
       <AboutSection />
       <ProgramsSection />
@@ -396,14 +443,6 @@ function Hero() {
         <div className="hero-cta">
           <a className="btn-primary" href={DISCORD} target="_blank" rel="noreferrer">Join the Community</a>
           <Link className="btn-secondary-dark" to="/resources">Explore Resources</Link>
-        </div>
-        <div className="hero-stats">
-          {STATS.map((s) => (
-            <div key={s.v} className="hero-stat">
-              <span className="hero-stat-num">{s.k}</span>
-              <span className="hero-stat-label">{s.v}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>

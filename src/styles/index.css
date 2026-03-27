@@ -62,6 +62,21 @@ body {
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-sm);
 }
+/* ── CURSOR GLOW ── */
+.cursor-glow {
+  position: fixed;
+  width: 680px; height: 680px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(10,132,255,.1) 0%, rgba(44,196,111,.05) 40%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity .4s;
+  will-change: left, top;
+}
+
 .app-wrap { display: flex; flex-direction: column; min-height: 100vh; }
 main { flex: 1; }
 .section { padding: var(--section-py) var(--section-px); }
