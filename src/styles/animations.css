@@ -1,0 +1,32 @@
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes wordIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes countIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.reveal        { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease-out-expo), transform .7s var(--ease-out-expo); transition-delay: var(--reveal-delay, 0s); }
+.reveal-left   { opacity: 0; transform: translateX(-28px); transition: opacity .7s var(--ease-out-expo), transform .7s var(--ease-out-expo); transition-delay: var(--reveal-delay, 0s); }
+.reveal-right  { opacity: 0; transform: translateX(28px); transition: opacity .7s var(--ease-out-expo), transform .7s var(--ease-out-expo); transition-delay: var(--reveal-delay, 0s); }
+.reveal-scale  { opacity: 0; transform: scale(.96); transition: opacity .7s var(--ease-out-expo), transform .7s var(--ease-out-expo); transition-delay: var(--reveal-delay, 0s); }
+
+.reveal.revealed,
+.reveal-left.revealed,
+.reveal-right.revealed,
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero entrance (above fold - CSS animation not scroll) */
+.hero-anim-1 { animation: wordIn .6s var(--ease-out-expo) .1s both; }
+.hero-anim-2 { animation: wordIn .7s var(--ease-out-expo) .25s both; }
+.hero-anim-3 { animation: wordIn .7s var(--ease-out-expo) .4s both; }
+.hero-anim-4 { animation: wordIn .7s var(--ease-out-expo) .55s both; }
+.hero-anim-5 { animation: wordIn .7s var(--ease-out-expo) .7s both; }

@@ -1,0 +1,36 @@
+.donate-page { background: var(--surface2); }
+.donate-impact { max-width: 640px; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 16px; }
+.donate-tier {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 24px 28px;
+  display: flex; align-items: center; gap: 24px;
+  transition: border-color .2s, box-shadow .25s, transform .25s var(--ease-out-expo);
+}
+.donate-tier:hover { border-color: rgba(10,132,255,.25); box-shadow: var(--shadow-card-hover); transform: translateX(4px); }
+.donate-amt {
+  font-family: 'Montserrat', 'Inter', sans-serif; font-size: 1.6rem; font-weight: 900;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  -webkit-background-clip: text; background-clip: text; color: transparent; min-width: 64px;
+}
+.donate-impact-text { font-size: .97rem; color: #334155; line-height: 1.6; }
+.donate-cta-box {
+  max-width: 640px; margin: 0 auto;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-xl); padding: 48px 40px;
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.donate-cta-box p { font-size: .97rem; color: var(--muted); line-height: 1.7; }
+.donate-why { max-width: 640px; margin: 0 auto 48px; }
+.donate-why h3 { font-family: 'Montserrat', 'Inter', sans-serif; font-size: 1.2rem; font-weight: 900; color: var(--ink); margin-bottom: 18px; letter-spacing: -.02em; }
+.donate-why-list { display: flex; flex-direction: column; gap: 14px; }
+.donate-why-item { display: flex; align-items: flex-start; gap: 14px; font-size: .95rem; color: #334155; line-height: 1.65; }
+.donate-check {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+  background: var(--green-light); border: 1px solid rgba(44,196,111,.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--green); font-size: .75rem; font-weight: 900;
+}
+@media (max-width: 720px) {
+  .donate-tier { gap: 16px; }
+  .donate-cta-box { padding: 36px 24px; }
+}

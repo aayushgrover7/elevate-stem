@@ -1,0 +1,14 @@
+.resources-full { background: var(--surface2); }
+.filter-strip {
+  max-width: 1100px; margin: 0 auto 40px;
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.filter-pill {
+  font-size: .82rem; font-weight: 700; padding: 8px 18px;
+  border-radius: 999px; border: 1.5px solid var(--line);
+  background: var(--surface); color: var(--muted);
+  cursor: pointer; transition: background .15s, color .15s, border-color .15s;
+}
+.filter-pill:hover { border-color: var(--blue); color: var(--blue); }
+.filter-pill.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+.resources-back { display: flex; justify-content: center; margin-top: 56px; }
