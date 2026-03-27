@@ -51,7 +51,6 @@ const TEAM = [
 ];
 
 const DISCORD       = "https://discord.gg/ymrERFS4Et";
-const YOUTUBE       = "https://www.youtube.com/@ElevateSTEM_1";
 const HACKCLUB_DONATE = "https://hackclub.com/donations/";
 
 /* ─── UTILITIES ─── */
@@ -194,7 +193,6 @@ function Header() {
         <NavLink to="/sponsors">Sponsors</NavLink>
         <NavLink to="/resources">Resources</NavLink>
         <NavLink to="/donate">Donate</NavLink>
-        <a href={YOUTUBE} target="_blank" rel="noreferrer">YouTube</a>
         <a className="nav-pill" href={DISCORD} target="_blank" rel="noreferrer">Join Discord</a>
       </div>
     </header>
@@ -217,7 +215,6 @@ function Footer() {
           <p className="footer-mission">Empowering the next generation of global innovators — one student at a time.</p>
           <div className="footer-socials">
             <a href={DISCORD} target="_blank" rel="noreferrer" className="social-chip">Discord</a>
-            <a href={YOUTUBE} target="_blank" rel="noreferrer" className="social-chip">YouTube</a>
           </div>
         </div>
         <div className="footer-links-group">
@@ -232,12 +229,12 @@ function Footer() {
             <div className="footer-heading">Programs</div>
             <Link to="/competitions">Competitions</Link>
             <Link to="/resources">Resources</Link>
-            <a href={YOUTUBE} target="_blank" rel="noreferrer">YouTube</a>
+            <Link to="/donate">STEM for All</Link>
           </div>
           <div>
             <div className="footer-heading">Community</div>
             <a href={DISCORD} target="_blank" rel="noreferrer">Discord Server</a>
-            <a href={YOUTUBE} target="_blank" rel="noreferrer">YouTube Channel</a>
+            <Link to="/partners">Partner Network</Link>
           </div>
         </div>
       </div>
@@ -477,7 +474,7 @@ function AboutSection() {
           <p>Since our founding, we've hosted 7+ hands-on workshops, built 20+ institutional partnerships, raised $574+ to expand STEM access, and collaborated with educators and advocates to bring real opportunities directly to students.</p>
           <div className="about-ctas">
             <Link className="btn-primary" to="/competitions">View Competitions</Link>
-            <a className="btn-secondary" href={YOUTUBE} target="_blank" rel="noreferrer">Watch on YouTube</a>
+            <Link className="btn-secondary" to="/resources">Browse Resources</Link>
           </div>
         </div>
         <div className="about-highlights reveal-right">
@@ -506,7 +503,6 @@ function ProgramsSection() {
   const programs = [
     { icon:"🏅", title:"Competitions",    desc:"The STEMvision competition invites students to showcase creativity and technical skill for cash prizes.", to:"/competitions", cta:"Learn More" },
     { icon:"📚", title:"Free Resources",  desc:"Nine curated PDF guides covering research, grant writing, CV templates, cold emailing, and more.",        to:"/resources",    cta:"Download Guides" },
-    { icon:"🎬", title:"YouTube",          desc:"Educational videos, workshop recordings, and STEM career content on our growing YouTube channel.",        href:YOUTUBE,       cta:"Watch Now" },
     { icon:"🤝", title:"Partnerships",    desc:"We collaborate with 20+ nonprofits, academic orgs, and community groups to amplify student impact.",     to:"/partners",     cta:"View Partners" },
     { icon:"💬", title:"Community",        desc:"A 725+ member Discord community for students to connect, collaborate, and grow together.",              href:DISCORD,       cta:"Join Discord" },
     { icon:"💙", title:"STEM for All",     desc:"We're committed to getting STEM supplies and resources into the hands of underserved kids worldwide.",  to:"/donate",       cta:"Support the Mission" },
