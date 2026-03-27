@@ -40,8 +40,8 @@
 .nav.scrolled { box-shadow: 0 1px 24px rgba(15,23,42,.1); }
 
 .logo-link {
-  font-family: 'Montserrat', 'Inter', sans-serif;
-  font-weight: 900; font-size: 1.35rem; letter-spacing: -.02em;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600; font-size: 1.5rem; letter-spacing: -.01em;
   text-decoration: none; color: var(--ink);
   display: flex; align-items: center; gap: .2em;
 }
@@ -124,9 +124,9 @@
 .page-hero-inner { position: relative; z-index: 1; max-width: 720px; }
 .page-hero .section-eyebrow { color: rgba(44,196,111,.9); display: block; }
 .page-hero-title {
-  font-family: 'Montserrat', 'Inter', sans-serif;
-  font-size: clamp(32px, 5vw, 56px); font-weight: 900;
-  letter-spacing: -.035em; line-height: 1.08; color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5.5vw, 64px); font-weight: 600;
+  letter-spacing: -.01em; line-height: 1.05; color: #fff;
   margin: 12px 0 14px;
 }
 .page-hero-sub { font-size: 1rem; color: rgba(255,255,255,.5); line-height: 1.75; max-width: 540px; }
@@ -144,8 +144,8 @@
 .footer-brand { max-width: 300px; }
 .footer-logo {
   display: flex; align-items: center; gap: .2em;
-  font-family: 'Montserrat', 'Inter', sans-serif;
-  font-weight: 900; font-size: 1.35rem; color: #fff; margin-bottom: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600; font-size: 1.6rem; color: #fff; margin-bottom: 12px;
 }
 .footer-mission { font-size: .9rem; color: #64748b; line-height: 1.75; margin-bottom: 20px; }
 .footer-socials { display: flex; gap: 8px; flex-wrap: wrap; }
